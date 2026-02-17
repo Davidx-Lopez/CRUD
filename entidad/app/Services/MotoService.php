@@ -1,40 +1,47 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories\Eloquent;
 
+use App\Models\Moto;
 use App\Repositories\Interfaces\MotoRepositoryInterface;
 
-class MotoService
+class MotoRepository implements MotoRepositoryInterface
 {
-    protected $repository;
-
-    public function __construct(MotoRepositoryInterface $repository)
+    public function all()
     {
-        $this->repository = $repository;
+        return Moto::all();
     }
 
-    public function listar()
+    public function find($id)
     {
-        return $this->repository->all();
+        return Moto::find($id);
     }
 
-    public function crear(array $data)
+    public function create(array $data)
     {
-        return $this->repository->create($data);
+        return Moto::create($data);
     }
 
-    public function mostrar($id)
+    public function update($id, array $data)
     {
-        return $this->repository->find($id);
+        $moto = Moto::find($id);
+
+        if ($moto) {
+            $moto->update($data);
+            return $moto;
+        }
+
+        return null;
     }
 
-    public function actualizar($id, array $data)
+    public function delete($id)
     {
-        return $this->repository->update($id, $data);
-    }
+        $moto = Moto::find($id);
 
-    public function eliminar($id)
-    {
-        return $this->repository->delete($id);
+        if ($moto) {
+            return $moto->delete();
+        }
+
+        return false;
     }
 }

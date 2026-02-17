@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MotoController;
+use App\Http\Controllers\LibroController;
 
-Route::apiResource('motos', MotoController::class);
+
+Route::apiResource('libros', LibroController::class);
